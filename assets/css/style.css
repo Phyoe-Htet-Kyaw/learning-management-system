@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-size: 1rem;
+    font-family: 'Ubuntu', sans-serif;
+    color: #333;
+}
+
+.login-bg-color{
+    background-image: url(../images/cambridge.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: row-reverse;
+    height: 100vh;
+}
+
+.login-bg-color .login{
+    width: 30%;
+    height: 100vh;
+    background-color: #fff;
+    padding: 0 5%;
+}
+
+.login-bg-color .login h1.login-header,
+.login-bg-color .login h1.register-header{
+    text-align: center;
+}
+
+.login-bg-color .login h1.login-header{
+    margin-top: 50%;
+}
+
+.login-bg-color .login h1.register-header{
+    margin-top: 25%;
+}
+
+.text-red{
+    color: #f00;
+}
+
+.login-bg-color .login .login-form form p{
+    text-align: center;
+}
+
+.login-bg-color .login .login-form form p a{
+    color: crimson;
+    transition: 0.1s ease;
+    text-decoration: none;
+}
+
+.login-bg-color .login .login-form form p a:hover{
+    font-weight: bold;
+}
+
+.login-bg-color .login .login-form form label{
+    margin-bottom: 3%;
+    display: block;
+    font-weight: bold;
+}
+
+.login-bg-color .login .login-form .form-group{
+    margin-bottom: 3%;
+}
+
+.login-bg-color .login .login-form form input[type=text]::placeholder,
+.login-bg-color .login .login-form form input[type=email]::placeholder,
+.login-bg-color .login .login-form form input[type=password]::placeholder{
+    color: #333;
+}
+
+.login-bg-color .login .login-form form input[type=text],
+.login-bg-color .login .login-form form input[type=email],
+.login-bg-color .login .login-form form input[type=password]{
+    width: 100%;
+    padding: 3%;
+    background-color: #ececec;
+    border: none;
+    width: 94%;
+    border-radius: 20px;
+    transition: 0.4s ease;
+}
+
+.login-bg-color .login .login-form form input[type=text]:focus,
+.login-bg-color .login .login-form form input[type=text]:focus,
+.login-bg-color .login .login-form form input[type=email]:focus,
+.login-bg-color .login .login-form form input[type=password]:focus{
+    outline: none;
+    border: 3px solid skyblue;
+    border-radius: 20px;
+    width: 93%;
+}
+
+.login-bg-color .login .login-form .form-group button{
+    padding: 3%;
+    background-color: crimson;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.4s ease;
+}
+
+.login-bg-color .login .login-form .form-group button:hover{
+    padding: 3%;
+    background-color: #fff;
+    color: crimson;
+    font-weight: bold;
+    border: 3px solid crimson;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.login-bg-color .main-header{
+    width: 70%;
+}
+
+.login-bg-color .main-header .header-part{
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 30%;
+    color: #fff;
+    text-shadow: 0 0 10px #000;
+}
+
+.login-bg-color .main-header .header-part h1{
+    text-align: left;
+    font-size: 3rem;
+}
+
+.login-bg-color .main-header .header-part h1 span{
+    font-size: 2rem;
+    text-transform: lowercase;
+    color: crimson;
+}
+
+.alert-danger{
+    padding: 3%;
+    background-color: crimson;
+    color: #fff;
+    border-radius: 10px;
+    margin: 3% 0;
+}
+
+.index-bg{
+    background-image: url(../images/thumb-1920-932313.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    padding: 0 10%;
+}
+
+.main-section{
+    background-color: #fff;
+    position: relative;
+    top: 100px;
+    padding: 5%;
+    border-radius: 20px;
+}
+
+.main-section-header h1{
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.main-section-para p{
+    line-height: 25px;
+}
+
+.main-section-para p:first-child{
+    margin-top: 5%;
+}
+
+.main-section-para p:last-child{
+    margin-bottom: 10%;
+}
+
+.main-section-button button{
+    padding: 1%;
+    background-color: crimson;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 0 auto;
+    transition: 0.4s ease;
+    display: block;
+}
+
+.main-section-button button:hover{
+    padding: 1%;
+    background-color: #fff;
+    color: crimson;
+    font-weight: bold;
+    border: 3px solid crimson;
+    border-radius: 10px;
+    cursor: pointer;
+}
