@@ -16,6 +16,7 @@ class Authentication extends DB{
             $password_origin = $request['password'];
             $password = password_hash($request['password'], PASSWORD_BCRYPT);
             $con_password = $request['con_password'];
+            $grade_id = $request['grade_id'];
             $status = 0;
 
             if($username == ""){
@@ -39,13 +40,14 @@ class Authentication extends DB{
                                     if($password_origin != $con_password){
                                         echo "<p class='alert alert-danger'>Password and confirm password didn't match!</p>";
                                     }else{
-                                        $sql = "INSERT INTO users (name, roll_no, email, password, status) VALUES (:name, :roll_no, :email, :password, :status)";
+                                        $sql = "INSERT INTO users (name, roll_no, email, password, status, grade_id) VALUES (:name, :roll_no, :email, :password, :status, :grade_id)";
                                         $stmt = $this->con->prepare($sql);
                                         $stmt->bindParam(":name", $username, PDO::PARAM_STR);
                                         $stmt->bindParam(":roll_no", $roll_no, PDO::PARAM_STR);
                                         $stmt->bindParam(":email", $email, PDO::PARAM_STR);
                                         $stmt->bindParam(":password", $password, PDO::PARAM_STR);
                                         $stmt->bindParam(":status", $status, PDO::PARAM_INT);
+                                        $stmt->bindParam(":grade_id", $grade_id, PDO::PARAM_INT);
                                         $stmt->execute();
                                         $this->setSession($email);
                                         return true;
@@ -113,6 +115,22 @@ class Authentication extends DB{
     public function checkSession(){
         if(!isset($_SESSION['user_id'])){
             echo "<script>location.href='login.php'</script>";
+        }
+    }
+
+    public function checkSessionAdmin(){
+        if(isset($_SESSION['user_id'])){
+            $id = $_SESSION['user_id'];
+            $sql = "SELECT * FROM users WHERE id=:id";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindParam("id", $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $res = $stmt->fetch(PDO::FETCH_OBJ);
+            if($res->status == 0){
+                echo "<script>location.href='../'</script>";
+            }
+        }else{
+            echo "<script>location.href='../login.php'</script>";
         }
     }
 

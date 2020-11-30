@@ -41,8 +41,8 @@
                             ?>
                                 <tr>
                                     <td>
-                                        <a href="#"><button class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></button></a>
-                                        <a href="#"><button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></a>
+                                        <a href="switch_user.php?id=<?php echo $value->id; ?>"><button class="btn btn-primary btn-sm"><i class="fa fa-exchange"></i></button></a>
+                                        <!-- <a href="#"><button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></a> -->
                                     </td>
                                     <td><?php echo $index; $index++; ?></td>
                                     <td><?php echo $value->name; ?></td>

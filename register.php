@@ -24,6 +24,21 @@
                         <input type="text" placeholder="Enter Roll No" id="roll_no" required name="roll_no" />
                     </div>
                     <div class="form-group">
+                        <label for="grade-id">Grade <span class="text-red">*</span>: </label>
+                        <select name="grade_id" id="grade-id">
+                            <?php
+                                $grade = new Grade;
+                                $fetch = $grade->index();
+
+                                foreach($fetch as $value){
+                                    ?>
+                                        <option value="<?php echo $value->id; ?>"><?php echo $value->grade_name; ?></option>
+                                    <?php
+                                }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="password">Password <span class="text-red">*</span>: </label>
                         <input type="password" placeholder="Enter Password" id="password" required name="password" />
                     </div>

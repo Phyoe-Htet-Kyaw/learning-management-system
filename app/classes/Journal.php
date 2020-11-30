@@ -49,7 +49,7 @@ class Journal extends DB{
                                 echo "<p class='alert-danger'>Please select end date!</p>";
                             }else{
 
-                                $fourth_sql = "SELECT * FROM journal WHERE grade_id=:grade_id";
+                                $fourth_sql = "SELECT * FROM queue WHERE grade_id=:grade_id";
                                 $fourth_stmt = $this->con->prepare($fourth_sql);
                                 $fourth_stmt->bindParam("grade_id", $grade_id, PDO::PARAM_INT);
                                 $fourth_stmt->execute();
@@ -232,7 +232,7 @@ class Journal extends DB{
                             if($end_date == ""){
                                 echo "<p class='alert-danger'>Please select end date!</p>";
                             }else{
-                                $fourth_sql = "SELECT * FROM assignment WHERE grade_id=:grade_id";
+                                $fourth_sql = "SELECT * FROM queue WHERE grade_id=:grade_id";
                                 $fourth_stmt = $this->con->prepare($fourth_sql);
                                 $fourth_stmt->bindParam("grade_id", $grade_id, PDO::PARAM_INT);
                                 $fourth_stmt->execute();

@@ -1,7 +1,7 @@
 <?php 
   include "../init/admin_init.php";
   $auth = new Authentication;
-  $auth->checkSession();
+  $auth->checkSessionAdmin();
 ?>
 <!DOCTYPE html>
 <html>
@@ -228,7 +228,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="http://localhost/lms" class="nav-link bg-danger">
+            <a href="../" class="nav-link bg-danger">
               <i class="nav-icon fa fa-sign-out"></i>
               <p>
                 Log Out

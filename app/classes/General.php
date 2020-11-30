@@ -10,9 +10,18 @@ class General extends DB{
 
     public function checkMain(){
         $today = date('Y-m-d');
+        
+        $user_id = $_SESSION['user_id'];
+        $user_sql = "SELECT * FROM users WHERE id=:id";
+        $user_stmt = $this->con->prepare($user_sql);
+        $user_stmt->bindParam("id", $user_id, PDO::PARAM_INT);
+        $user_stmt->execute();
+        $user_res = $user_stmt->fetch(PDO::PARAM_INT);
+        $grade_id = $user_res->grade_id;
 
-        $sql = "SELECT * FROM queue";
+        $sql = "SELECT * FROM queue WHERE grade_id=:grade_id";
         $stmt = $this->con->prepare($sql);
+        $stmt->bindParam("grade_id", $grade_id, PDO::PARAM_INT);
         $stmt->execute();
         $res = $stmt->fetchAll(PDO::FETCH_OBJ);
         
@@ -30,21 +39,14 @@ class General extends DB{
             $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));  
             $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24)); 
 
-            // printf("%d days", $days);  
-            // echo $days;
-
             $i = 0;
             array_push($date_arr, ["id" => $value->id, "date" => $start_date->format('Y-m-d')]);
             do{
                 $start_date->modify('+1 day');
-                // echo $start_date->format('Y-m-d')."\n";
                 array_push($date_arr, ["id" => $value->id, "date" => $start_date->format('Y-m-d')]);
                 $i++;
             }while($i < $days);
         }
-        // echo "<pre>";
-        // print_r($date_arr);
-        // echo "</pre>";
 
         foreach($date_arr as $value){
             if($value['date'] == $today){
