@@ -47,6 +47,15 @@ class User extends DB{
         $stmt->execute();
         return true;
     }
+
+    public function fetchById($id){
+        $sql = "SELECT * FROM users WHERE id=:id";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindParam("id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $res = $stmt->fetch(PDO::FETCH_OBJ);
+        return $res;
+    }
 }
 
 ?>

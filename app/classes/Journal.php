@@ -424,6 +424,14 @@ class Journal extends DB{
         $res = $stmt->fetch(PDO::FETCH_OBJ);
         return $res;
     }
+
+    public function selectJournalDone(){
+        $sql = "SELECT * FROM journal_done ORDER BY id DESC";
+        $stmt = $this->con->prepare($sql);
+        $stmt->execute();
+        $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $res;
+    }
 }
 
 ?>

@@ -1,5 +1,6 @@
 <?php 
     include "template/header.php"; 
+    define ('SITE_ROOT', realpath(dirname(__FILE__)));
     $auth = new Authentication;
     $auth->checkSession();
 

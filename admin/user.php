@@ -29,6 +29,7 @@
                             <th>Name</th>
                             <th>Roll No</th>
                             <th>Email</th>
+                            <th>Grade</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -48,6 +49,15 @@
                                     <td><?php echo $value->name; ?></td>
                                     <td><?php echo $value->roll_no; ?></td>
                                     <td><?php echo $value->email; ?></td>
+                                    <td>
+                                        <?php 
+                                            if($value->status == 0){
+                                                $grade = new Grade;
+                                                $grade_data = $grade->fetchById($value->grade_id);
+                                                echo $grade_data->grade_name;
+                                            }
+                                        ?>
+                                    </td>
                                     <td>
                                         <?php 
                                             if($value->status == 0){

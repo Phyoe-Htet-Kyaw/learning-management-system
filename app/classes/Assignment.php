@@ -424,6 +424,63 @@ class Assignment extends DB{
         $res = $stmt->fetch(PDO::FETCH_OBJ);
         return $res;
     }
+
+    public function reportAssignment($request, $file){
+        if(isset($request['submit'])){
+            $assignment_id = $request['assignment_id'];
+            $user_id = $_SESSION['user_id'];
+            $file_name = $file['assignment']['name'];
+            $file_tmp = $file['assignment']['tmp_name'];
+            $file_ext_3 = explode('.',$file['assignment']['name']);
+            $file_ext_2 = end($file_ext_3);
+            $file_ext = strtolower($file_ext_2);
+            $uploads = 'assets/uploads/';
+
+            $extensions= array("pdf");
+
+            if($file_name == ""){
+                echo "<p class='alert alert-danger'>Please choose file!</p>";
+            }else{
+                if(in_array($file_ext,$extensions) === false){
+                    echo "<p class='alert alert-danger'>Please choose pdf file!</p>";
+                }else{
+                    move_uploaded_file($file_tmp, $uploads.$file_name);
+
+
+                    $sql = "INSERT INTO assignment_done (assignment_id, user_id, file) VALUES (:assignment_id, :user_id, :file)";
+                    $stmt = $this->con->prepare($sql);
+                    $stmt->bindParam('assignment_id', $assignment_id, PDO::PARAM_INT);
+                    $stmt->bindParam('user_id', $user_id, PDO::PARAM_INT);
+                    $stmt->bindParam('file', $file_name, PDO::PARAM_STR);
+                    $stmt->execute();
+                    return true;
+                }
+            }
+        }
+    }
+
+    public function checkAssignmentReportOrNot($id){
+        $user_id = $_SESSION['user_id'];
+        $sql = "SELECT * FROM assignment_done WHERE assignment_id=:assignment_id AND user_id=:user_id";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindParam("assignment_id", $id, PDO::PARAM_INT);
+        $stmt->bindParam("user_id", $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $res = $stmt->fetch(PDO::FETCH_OBJ);
+        if(is_object($res)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function selectAssignmentDone(){
+        $sql = "SELECT * FROM assignment_done ORDER BY id DESC";
+        $stmt = $this->con->prepare($sql);
+        $stmt->execute();
+        $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $res;
+    }
 }
 
 ?>

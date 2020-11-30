@@ -178,7 +178,11 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Admin</a>
+          <?php 
+            $user = new User;
+            $user_data = $user->currentUser();
+          ?>
+          <a href="#" class="d-block"><?php echo $user_data->name; ?></a>
         </div>
       </div>
 
@@ -203,21 +207,51 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="assignment.php" class="nav-link">
-              <i class="nav-icon fa fa-th"></i>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-pie-chart"></i>
               <p>
                 Assignment
+                <i class="right fa fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="assignment.php" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Assignment</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="assignment_done.php" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Assignment Done</p>
+                </a>
+              </li>
+            </ul>
           </li>
-          <li class="nav-item">
-            <a href="journal.php" class="nav-link">
-              <i class="nav-icon fa fa-th"></i>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-pie-chart"></i>
               <p>
                 Journal
+                <i class="right fa fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="journal.php" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Journal</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="journal_done.php" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Journal Done</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
             <a href="user.php" class="nav-link">
