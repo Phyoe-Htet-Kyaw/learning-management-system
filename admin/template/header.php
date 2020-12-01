@@ -199,13 +199,34 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
-              <i class="nav-icon fa fa-th"></i>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-pie-chart"></i>
               <p>
-                Quiz
+                Quize
+                <i class="right fa fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="quize_title.php" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Quize</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="quize_question.php" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Quize Question</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="quize_done.php" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Quize Done</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">

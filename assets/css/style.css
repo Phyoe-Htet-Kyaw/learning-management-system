@@ -267,3 +267,39 @@ body{
     color: #fff;
     font-weight: bold;
 }
+
+.quize b{
+    margin: 3% 0 1% 0;
+    display: block;
+}
+
+.quize form input[type="radio"]{
+    margin-bottom: 1%;
+}
+
+.quize form a{
+    text-decoration: none;
+}
+
+.quize form button{
+    padding: 1%;
+    margin-top: 3%;
+    background-color: crimson;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.4s ease;
+    display: block;
+}
+
+.quize form button:hover{
+    padding: 1%;
+    background-color: #fff;
+    color: crimson;
+    font-weight: bold;
+    border: 3px solid crimson;
+    border-radius: 10px;
+    cursor: pointer;
+}

@@ -80,10 +80,121 @@ class General extends DB{
                         return $third_res;
                     }
                 }else{
-                    //
+                    $quize_id = $sec_res->quize_id;
+                    $fifth_sql = "SELECT * FROM quize_title WHERE id=:id";
+                    $fifth_stmt = $this->con->prepare($fifth_sql);
+                    $fifth_stmt->bindParam("id", $quize_id, PDO::PARAM_INT);
+                    $fifth_stmt->execute();
+                    $fifth_res = $fifth_stmt->fetch(PDO::FETCH_OBJ);
+                    return $fifth_res;
                 }
             }
         }
+    }
+
+    public function quizeRender($id){
+        $sql = "SELECT * FROM quize_question WHERE quize_title_id=:id";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindParam("id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $res;
+    }
+
+    public function checkAnswer($request, $id, $quiz_id){
+        if(isset($request['submit'])){
+            if(isset($request['answer'])){
+                $answer = $request['answer'];
+                if($answer == ""){
+                    echo "<p class='alert alert-danger'>Please choose answer!</p>";
+                }else{
+                    if(isset($_SESSION['result'])){
+                        $result_arr = $_SESSION['result'];
+                        $sql = "SELECT * FROM quize_question WHERE id=:id";
+                        $stmt = $this->con->prepare($sql);
+                        $stmt->bindParam("id", $id, PDO::PARAM_INT);
+                        $stmt->execute();
+                        $res = $stmt->fetch(PDO::FETCH_OBJ);
+                        if($res->true_answer_no ==  $request['answer']){
+                            array_push($result_arr, ["quiz_id" => $quiz_id, "question_id" => $id, "result" => 1, "user_id" => $_SESSION['user_id']]);
+                            $_SESSION['result'] = $result_arr;
+                        }else{
+                            array_push($result_arr, ["quiz_id" => $quiz_id, "question_id" => $id, "result" => 0, "user_id" => $_SESSION['user_id']]);
+                            $_SESSION['result'] = $result_arr;
+                        }
+                        return true;
+                    }else{
+                        $_SESSION['result'] = [];
+                        $sql = "SELECT * FROM quize_question WHERE id=:id";
+                        $stmt = $this->con->prepare($sql);
+                        $stmt->bindParam("id", $id, PDO::PARAM_INT);
+                        $stmt->execute();
+                        $res = $stmt->fetch(PDO::FETCH_OBJ);
+                        if($res->true_answer_no ==  $request['answer']){
+                            array_push($_SESSION['result'], ["quiz_id" => $quiz_id, "question_id" => $id, "result" => 1, "user_id" => $_SESSION['user_id']]);
+                        }else{
+                            array_push($_SESSION['result'], ["quiz_id" => $quiz_id, "question_id" => $id, "result" => 0, "user_id" => $_SESSION['user_id']]);
+                        }
+                        return true;
+                    }
+                }
+            }else{
+                echo "<p class='alert alert-danger'>Please choose answer!</p>";
+            }
+        }
+    }
+
+    public function calculateQuizMark(){
+        $quiz_result = $_SESSION['result'];
+        $marks = 0;
+        foreach($quiz_result as $value){
+            $marks += $value['result'];
+        }
+
+        $quiz_title_id = $quiz_result[count($quiz_result) - 1]['quiz_id'];
+        $user_id = $quiz_result[count($quiz_result) - 1]['user_id'];
+
+        $sql = "INSERT INTO quiz_done (quiz_title_id, user_id, marks) VALUES (:quiz_title_id, :user_id, :marks)";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindParam("quiz_title_id", $quiz_title_id, PDO::PARAM_INT);
+        $stmt->bindParam("user_id", $user_id, PDO::PARAM_INT);
+        $stmt->bindParam("marks", $marks, PDO::PARAM_INT);
+        $stmt->execute();
+
+        foreach($quiz_result as $value){
+            $sec_sql = "INSERT INTO quiz_result (quiz_title_id, question_id, result, user_id) VALUES (:quiz_title_id, :question_id, :result, :user_id)";
+            $sec_stmt = $this->con->prepare($sec_sql);
+            $sec_stmt->bindParam("quiz_title_id", $value['quiz_id'], PDO::PARAM_INT);
+            $sec_stmt->bindParam("question_id", $value['question_id'], PDO::PARAM_INT);
+            $sec_stmt->bindParam("result", $value['result'], PDO::PARAM_INT);
+            $sec_stmt->bindParam("user_id", $value['user_id'], PDO::PARAM_INT);
+            $sec_stmt->execute();
+        }
+
+        $_SESSION['result'] = [];
+        return true;
+    }
+
+    public function checkQuizFinishOrNot($quiz_title_id){
+        $user_id = $_SESSION['user_id'];
+        $sql = "SELECT * FROM quiz_done WHERE quiz_title_id=:quiz_title_id AND user_id=:user_id";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindParam("quiz_title_id", $quiz_title_id, PDO::PARAM_INT);
+        $stmt->bindParam("user_id", $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $res = $stmt->fetch(PDO::FETCH_OBJ);
+        return $res;
+    }
+
+    public function showMarks($quiz_title_id){
+        $user_id = $_SESSION['user_id'];
+        $sql = "SELECT * FROM quiz_done WHERE quiz_title_id=:quiz_title_id AND user_id=:user_id";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindParam("quiz_title_id", $quiz_title_id, PDO::PARAM_INT);
+        $stmt->bindParam("user_id", $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $res = $stmt->fetch(PDO::FETCH_OBJ);
+        return $res;
     }
 }
 

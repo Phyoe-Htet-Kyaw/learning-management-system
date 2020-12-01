@@ -1,7 +1,5 @@
 <?php 
     include "template/header.php"; 
-    
-    
     define ('SITE_ROOT', realpath(dirname(__FILE__)));
     $auth = new Authentication;
     $auth->checkSession();
@@ -29,19 +27,13 @@
         $general = new General;
         if($general->checkMain()){
             $data = $general->checkMain();
-            if(isset($data->assignment_title)){
-                include "template/assignment.php";
-            }else if(isset($data->journal_title)){
-                include "template/journal.php";
-            }else if(isset($data->quize_title)){
-                $checking = $general->checkQuizFinishOrNot($data->id);
-                include "template/quize.php";
+            if(isset($data->quize_title)){
+                include "template/next_quize.php";
             }
         }else{
             include "template/no_question.php";
         }
     ?>
-    
 </div>
 
 <?php include "template/footer.php"; ?>
