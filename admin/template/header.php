@@ -193,7 +193,7 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item">
             <a href="grade.php" class="nav-link">
-              <i class="nav-icon fa fa-th"></i>
+              <i class="nav-icon fa fa-graduation-cap"></i>
               <p>
                 Grade
               </p>
@@ -201,36 +201,42 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-pie-chart"></i>
+              <i class="nav-icon fa fa-question-circle"></i>
               <p>
-                Quize
+                Quiz
                 <i class="right fa fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="quize_title.php" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Quize</p>
+                  <i class="fa fa-question-circle nav-icon"></i>
+                  <p>Quiz</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="quize_question.php" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Quize Question</p>
+                  <i class="fa fa-question nav-icon"></i>
+                  <p>Quiz Question</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="quize_done.php" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Quize Done</p>
+                  <i class="fa fa-check nav-icon"></i>
+                  <p>Quiz Done</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="quize_result.php" class="nav-link">
+                  <i class="fa fa-list nav-icon"></i>
+                  <p>Quiz Result</p>
                 </a>
               </li>
             </ul>
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-pie-chart"></i>
+              <i class="nav-icon fa fa-book"></i>
               <p>
                 Assignment
                 <i class="right fa fa-angle-left"></i>
@@ -239,13 +245,13 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="assignment.php" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
+                  <i class="fa fa-book nav-icon"></i>
                   <p>Assignment</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="assignment_done.php" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
+                  <i class="fa fa-check nav-icon"></i>
                   <p>Assignment Done</p>
                 </a>
               </li>
@@ -253,7 +259,7 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-pie-chart"></i>
+              <i class="nav-icon fa fa-newspaper-o"></i>
               <p>
                 Journal
                 <i class="right fa fa-angle-left"></i>
@@ -262,13 +268,13 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="journal.php" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
+                  <i class="fa fa-newspaper-o nav-icon"></i>
                   <p>Journal</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="journal_done.php" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
+                  <i class="fa fa-check nav-icon"></i>
                   <p>Journal Done</p>
                 </a>
               </li>
@@ -276,7 +282,7 @@
           </li>
           <li class="nav-item">
             <a href="user.php" class="nav-link">
-              <i class="nav-icon fa fa-th"></i>
+              <i class="nav-icon fa fa-users"></i>
               <p>
                 User
               </p>

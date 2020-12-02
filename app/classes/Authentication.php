@@ -40,17 +40,27 @@ class Authentication extends DB{
                                     if($password_origin != $con_password){
                                         echo "<p class='alert alert-danger'>Password and confirm password didn't match!</p>";
                                     }else{
-                                        $sql = "INSERT INTO users (name, roll_no, email, password, status, grade_id) VALUES (:name, :roll_no, :email, :password, :status, :grade_id)";
-                                        $stmt = $this->con->prepare($sql);
-                                        $stmt->bindParam(":name", $username, PDO::PARAM_STR);
-                                        $stmt->bindParam(":roll_no", $roll_no, PDO::PARAM_STR);
-                                        $stmt->bindParam(":email", $email, PDO::PARAM_STR);
-                                        $stmt->bindParam(":password", $password, PDO::PARAM_STR);
-                                        $stmt->bindParam(":status", $status, PDO::PARAM_INT);
-                                        $stmt->bindParam(":grade_id", $grade_id, PDO::PARAM_INT);
-                                        $stmt->execute();
-                                        $this->setSession($email);
-                                        return true;
+
+                                        $sql_sec = "SELECT * FROM users WHERE email=:email";
+                                        $stmt_sec = $this->con->prepare($sql_sec);
+                                        $stmt_sec->bindParam("email", $email, PDO::PARAM_STR);
+                                        $stmt_sec->execute();
+                                        $res_sec = $stmt_sec->fetch(PDO::FETCH_OBJ);
+                                        if(is_object($res_sec)){
+                                            echo "<p class='alert alert-danger'>Email is already registered. Please try another one!</p>";
+                                        }else{
+                                            $sql = "INSERT INTO users (name, roll_no, email, password, status, grade_id) VALUES (:name, :roll_no, :email, :password, :status, :grade_id)";
+                                            $stmt = $this->con->prepare($sql);
+                                            $stmt->bindParam(":name", $username, PDO::PARAM_STR);
+                                            $stmt->bindParam(":roll_no", $roll_no, PDO::PARAM_STR);
+                                            $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+                                            $stmt->bindParam(":password", $password, PDO::PARAM_STR);
+                                            $stmt->bindParam(":status", $status, PDO::PARAM_INT);
+                                            $stmt->bindParam(":grade_id", $grade_id, PDO::PARAM_INT);
+                                            $stmt->execute();
+                                            $this->setSession($email);
+                                            return true;
+                                        }
                                     }
                                 }
                             }
