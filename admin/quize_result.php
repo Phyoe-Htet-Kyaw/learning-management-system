@@ -37,6 +37,8 @@
                           $quize_arr = $quize->quizResultIndex();
                           $index = 1;
                           foreach($quize_arr as $value){
+                            $user_data = $quize->QuizDoneUploader($value->quiz_title_id);
+                            if($user_data->status == 2){
                             ?>
                               <tr>
                                 <td><?php echo $index; $index++; ?></td>
@@ -73,6 +75,50 @@
                                 <td><?php echo $value->time_stamp; ?></td>
                             </tr>
                             <?php
+                            }else if($user_data->status == 1){
+                              $user_quize_data = $quize->userQuizDone();
+                              foreach($user_quize_data as $data_A){
+                                if($data_A->id == $value->quiz_title_id){
+                                  ?>
+                                  <tr>
+                                <td><?php echo $index; $index++; ?></td>
+                                <td>
+                                  <?php
+                                    $quiz_title = new Quizetitle;
+                                    $quiz_title_data = $quiz_title->fetchById($value->quiz_title_id);
+                                    echo $quiz_title_data->quize_title;
+                                  ?>
+                                </td>
+                                <td>
+                                    <?php
+                                        $quiz_question = new QuizeQuestion;
+                                        $quiz_question_data = $quiz_question->fetchById($value->question_id);
+                                        echo $quiz_question_data->question;
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                        if($value->result == 0){
+                                            echo "<span class='badge badge-danger'>False</span>";
+                                        }else if($value->result == 1){
+                                            echo "<span class='badge badge-success'>True</span>";
+                                        }
+                                    ?>
+                                </td>
+                                <td>
+                                  <?php
+                                    $user = new User;
+                                    $user_data = $user->fetchById($value->user_id);
+                                    echo $user_data->name;
+                                  ?>
+                                </td>
+                                <td><?php echo $value->time_stamp; ?></td>
+                            </tr>
+                            <?php
+                                    
+                                  }
+                              }
+                            }
                           }
                         ?>
                     </tbody>

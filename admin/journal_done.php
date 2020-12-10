@@ -38,6 +38,8 @@
                           $journal_arr = $journal->selectJournalDone();
                           $index = 1;
                           foreach($journal_arr as $value){
+                            $user_data = $journal->journalUploader($value->journal_id);
+                            if($user_data->status == 2){
                             ?>
                               <tr>
                                 <td><?php echo $index; $index++; ?></td>
@@ -64,6 +66,41 @@
                                 <td><?php echo $a_data->end_date; ?></td>
                             </tr>
                             <?php
+                            }else if($user_data->status == 1){
+                              $user_journal_data = $journal->userJournal();
+                              foreach($user_journal_data as $data_A){
+                                if($data_A->id == $value->journal_id){
+                                  ?>
+
+                              <tr>
+                                <td><?php echo $index; $index++; ?></td>
+                                <td>
+                                    <?php 
+                                        $a_data = $journal->fetchById($value->journal_id);
+                                        echo $a_data->journal_title;
+                                    ?>
+                                </td>
+                                <td><?php echo $a_data->instruction; ?></td>
+                                <td>
+                                  <?php
+                                    $user = new User;
+                                    $user_data = $user->fetchById($value->user_id);
+                                    echo $user_data->name;
+                                  ?>
+                                </td>
+                                <td>
+                                  <?php
+                                    echo $value->time_stamp;
+                                  ?>
+                                </td>
+                                <td><?php echo $a_data->start_date; ?></td>
+                                <td><?php echo $a_data->end_date; ?></td>
+                            </tr>
+                            <?php
+                                    
+                                  }
+                              }
+                            }
                           }
                         ?>
                     </tbody>

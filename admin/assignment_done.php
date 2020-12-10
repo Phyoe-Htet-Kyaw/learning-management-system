@@ -39,35 +39,74 @@
                           $assignment_arr = $assignment->selectAssignmentDone();
                           $index = 1;
                           foreach($assignment_arr as $value){
-                            ?>
-                              <tr>
-                                <td>
-                                  <a href="../assets/uploads/<?php echo $value->file; ?>" target="_blank"><button class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></button></a>
-                                </td>
-                                <td><?php echo $index; $index++; ?></td>
-                                <td>
-                                    <?php 
-                                        $a_data = $assignment->fetchById($value->assignment_id);
-                                        echo $a_data->assignment_title;
+                            $user_data = $assignment->assignmentUploader($value->assignment_id);
+                            if($user_data->status == 2){
+                              ?>
+                                <tr>
+                                  <td>
+                                    <a href="../assets/uploads/<?php echo $value->file; ?>" target="_blank"><button class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></button></a>
+                                  </td>
+                                  <td><?php echo $index; $index++; ?></td>
+                                  <td>
+                                      <?php 
+                                          $a_data = $assignment->fetchById($value->assignment_id);
+                                          echo $a_data->assignment_title;
+                                      ?>
+                                  </td>
+                                  <td><?php echo $a_data->instruction; ?></td>
+                                  <td>
+                                    <?php
+                                      $user = new User;
+                                      $user_data = $user->fetchById($value->user_id);
+                                      echo $user_data->name;
                                     ?>
-                                </td>
-                                <td><?php echo $a_data->instruction; ?></td>
-                                <td>
-                                  <?php
-                                    $user = new User;
-                                    $user_data = $user->fetchById($value->user_id);
-                                    echo $user_data->name;
+                                  </td>
+                                  <td>
+                                    <?php
+                                      echo $value->time_stamp;
+                                    ?>
+                                  </td>
+                                  <td><?php echo $a_data->start_date; ?></td>
+                                  <td><?php echo $a_data->end_date; ?></td>
+                              </tr>
+                              <?php
+                            }else if($user_data->status == 1){
+                              $user_assignment_data = $assignment->userAssignment();
+                              foreach($user_assignment_data as $data_A){
+                                if($data_A->id == $value->assignment_id){
                                   ?>
-                                </td>
-                                <td>
+                                    <tr>
+                                      <td>
+                                        <a href="../assets/uploads/<?php echo $value->file; ?>" target="_blank"><button class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></button></a>
+                                      </td>
+                                      <td><?php echo $index; $index++; ?></td>
+                                      <td>
+                                          <?php 
+                                              $a_data = $assignment->fetchById($value->assignment_id);
+                                              echo $a_data->assignment_title;
+                                          ?>
+                                      </td>
+                                      <td><?php echo $a_data->instruction; ?></td>
+                                      <td>
+                                        <?php
+                                          $user = new User;
+                                          $user_data = $user->fetchById($value->user_id);
+                                          echo $user_data->name;
+                                        ?>
+                                      </td>
+                                      <td>
+                                        <?php
+                                          echo $value->time_stamp;
+                                        ?>
+                                      </td>
+                                      <td><?php echo $a_data->start_date; ?></td>
+                                      <td><?php echo $a_data->end_date; ?></td>
+                                  </tr>
                                   <?php
-                                    echo $value->time_stamp;
-                                  ?>
-                                </td>
-                                <td><?php echo $a_data->start_date; ?></td>
-                                <td><?php echo $a_data->end_date; ?></td>
-                            </tr>
-                            <?php
+                                    
+                                  }
+                              }
+                            }
                           }
                         ?>
                     </tbody>

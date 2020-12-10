@@ -20,12 +20,13 @@
                         <input type="email" placeholder="Enter Email" id="email" required name="email" />
                     </div>
                     <div class="form-group">
-                        <label for="roll_no">Roll No <span class="text-red">*</span>: </label>
-                        <input type="text" placeholder="Enter Roll No" id="roll_no" required name="roll_no" />
+                        <label for="roll_no">Roll <span class="text-red">*</span>: </label>
+                        <input type="text" placeholder="Enter Roll" id="roll_no" required name="roll_no" />
                     </div>
                     <div class="form-group">
-                        <label for="grade-id">Grade <span class="text-red">*</span>: </label>
+                        <label for="grade-id">Year <span class="text-red">*</span>: </label>
                         <select name="grade_id" id="grade-id">
+                            <option value="0">- Select -</option>
                             <?php
                                 $grade = new Grade;
                                 $fetch = $grade->index();

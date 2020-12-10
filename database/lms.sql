@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2020 at 03:10 PM
+-- Generation Time: Dec 10, 2020 at 07:53 AM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -43,8 +43,8 @@ CREATE TABLE `assignment` (
 --
 
 INSERT INTO `assignment` (`id`, `assignment_title`, `instruction`, `grade_id`, `user_id`, `start_date`, `end_date`, `time_stamp`) VALUES
-(1, 'Assignment 1 EDIT', 'Hello', 1, 1, '2020-11-30', '2020-12-03', '2020-11-30 06:18:18'),
-(2, 'Assignment 3 Edit', 'dw', 1, 1, '2020-12-12', '2020-12-13', '2020-11-30 06:18:07'),
+(1, 'Assignment 1 EDIT', 'Hello', 1, 3, '2020-11-30', '2020-12-03', '2020-12-10 06:10:00'),
+(2, 'Assignment 3 Edit', 'dw', 1, 3, '2020-12-12', '2020-12-13', '2020-12-10 06:09:34'),
 (3, 'Assignment 1', 'hello', 2, 2, '2020-12-09', '2020-12-10', '2020-11-30 08:43:19');
 
 -- --------------------------------------------------------
@@ -67,7 +67,7 @@ CREATE TABLE `assignment_done` (
 
 INSERT INTO `assignment_done` (`id`, `assignment_id`, `user_id`, `file`, `time_stamp`) VALUES
 (38, 1, 1, 'Operating System Concepts ( PDFDrive ).pdf', '2020-11-30 14:03:55'),
-(39, 1, 4, 'test.pdf', '2020-12-03 13:59:56');
+(39, 1, 4, 'test.pdf', '2020-12-10 06:09:44');
 
 -- --------------------------------------------------------
 
@@ -87,7 +87,8 @@ CREATE TABLE `grade` (
 
 INSERT INTO `grade` (`id`, `grade_name`, `time_stamp`) VALUES
 (1, 'Third Year', '2020-11-29 09:21:30'),
-(2, 'First Year (Honorus)', '2020-11-29 09:21:30');
+(2, 'First Year (Honorus)', '2020-11-29 09:21:30'),
+(4, 'None', '2020-12-27 14:39:25');
 
 -- --------------------------------------------------------
 
@@ -112,7 +113,7 @@ CREATE TABLE `journal` (
 --
 
 INSERT INTO `journal` (`id`, `journal_title`, `instruction`, `grade_id`, `user_id`, `start_date`, `end_date`, `pdf`, `time_stamp`) VALUES
-(6, 'Journal - 1', 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione sit quod placeat, porro quae incidunt, voluptatum a ea fugit nulla vitae repellendus! Veniam autem alias numquam architecto qui vel labore.', 1, 3, '2020-12-27', '2020-12-28', 'Theory of Computer Science (Automata, Languages and Computation) Third Edition ( PDFDrive ).pdf', '2020-12-27 14:04:42');
+(6, 'Journal - 1', 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione sit quod placeat, porro quae incidunt, voluptatum a ea fugit nulla vitae repellendus! Veniam autem alias numquam architecto qui vel labore.', 1, 3, '2020-12-27', '2020-12-28', 'Theory of Computer Science (Automata, Languages and Computation) Third Edition ( PDFDrive ).pdf', '2020-12-10 06:12:55');
 
 -- --------------------------------------------------------
 
@@ -132,7 +133,7 @@ CREATE TABLE `journal_done` (
 --
 
 INSERT INTO `journal_done` (`id`, `journal_id`, `user_id`, `time_stamp`) VALUES
-(1, 6, 1, '2020-12-27 13:46:15');
+(2, 6, 1, '2020-12-27 13:54:34');
 
 -- --------------------------------------------------------
 
@@ -159,7 +160,7 @@ CREATE TABLE `queue` (
 INSERT INTO `queue` (`id`, `name`, `grade_id`, `start_date`, `end_date`, `quize_id`, `assignment_id`, `journal_id`, `time_stamp`) VALUES
 (1, 'Assignment 1 EDIT', 1, '2020-11-30', '2020-12-03', NULL, 1, NULL, '2020-11-30 06:18:18'),
 (3, 'Assignment 3 Edit', 1, '2020-12-12', '2020-12-13', NULL, 2, NULL, '2020-11-30 06:18:07'),
-(5, 'Assignment 1', 2, '2020-12-09', '2020-12-10', NULL, 3, NULL, '2020-11-30 08:43:19'),
+(5, 'Assignment 1', 1, '2020-12-09', '2020-12-10', NULL, 3, NULL, '2020-12-09 13:22:54'),
 (10, 'Quize 1', 1, '2020-12-30', '2020-12-31', 4, NULL, NULL, '2020-12-01 01:53:25'),
 (12, 'Journal - 1', 1, '2020-12-27', '2020-12-28', NULL, NULL, 6, '2020-12-05 13:08:44');
 
@@ -213,7 +214,7 @@ CREATE TABLE `quize_title` (
 --
 
 INSERT INTO `quize_title` (`id`, `quize_title`, `grade_id`, `user_id`, `start_date`, `end_date`, `time_stamp`) VALUES
-(4, 'Quize 1', 1, 3, '2020-12-30', '2020-12-31', '2020-12-27 14:06:11');
+(4, 'Quize 1', 1, 3, '2020-12-30', '2020-12-31', '2020-12-10 06:22:21');
 
 -- --------------------------------------------------------
 
@@ -234,8 +235,7 @@ CREATE TABLE `quiz_done` (
 --
 
 INSERT INTO `quiz_done` (`id`, `quiz_title_id`, `user_id`, `marks`, `time_stamp`) VALUES
-(1, 4, 1, 4, '2020-12-31 15:04:35'),
-(2, 4, 4, 2, '2020-12-31 13:58:07');
+(3, 4, 1, 4, '2020-12-30 14:43:16');
 
 -- --------------------------------------------------------
 
@@ -266,7 +266,12 @@ INSERT INTO `quiz_result` (`id`, `quiz_title_id`, `question_id`, `result`, `user
 (7, 4, 3, 1, 4, '2020-12-31 13:58:07'),
 (8, 4, 4, 0, 4, '2020-12-31 13:58:07'),
 (9, 4, 5, 1, 4, '2020-12-31 13:58:07'),
-(10, 4, 6, 0, 4, '2020-12-31 13:58:07');
+(10, 4, 6, 0, 4, '2020-12-31 13:58:07'),
+(11, 4, 2, 1, 1, '2020-12-30 14:43:16'),
+(12, 4, 3, 1, 1, '2020-12-30 14:43:16'),
+(13, 4, 4, 0, 1, '2020-12-30 14:43:16'),
+(14, 4, 5, 1, 1, '2020-12-30 14:43:16'),
+(15, 4, 6, 1, 1, '2020-12-30 14:43:16');
 
 -- --------------------------------------------------------
 
@@ -290,11 +295,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `roll_no`, `email`, `password`, `status`, `grade_id`, `time_stamp`) VALUES
-(1, 'Phyoe Htet Kyaw', '3CS - 2', 'phyoehtetkyaw614@gmail.com', '$2y$10$PpPIotKuqT/Fs97XBzFmQ.Armj8B/zFipZ1Nd4.86AXom.9m.rFLq', 0, 1, '2020-11-30 14:30:50'),
-(2, 'Mg Mg', '3CS - 1', 'mgmg@gmail.com', '$2y$10$HT5Z51vFHK53ouXB3rRZDeIt8XJpJerJbVm/JBMRQQ68SOhQ1ORtO', 0, 1, '2020-12-03 14:23:39'),
+(1, 'Phyoe Htet Kyaw', '3CS - 2', 'phyoehtetkyaw614@gmail.com', '$2y$10$PpPIotKuqT/Fs97XBzFmQ.Armj8B/zFipZ1Nd4.86AXom.9m.rFLq', 0, 1, '2017-11-30 06:44:35'),
+(2, 'Mg Mg', '3CS - 1', 'mgmg@gmail.com', '$2y$10$HT5Z51vFHK53ouXB3rRZDeIt8XJpJerJbVm/JBMRQQ68SOhQ1ORtO', 0, 1, '2020-12-09 13:44:15'),
 (3, 'Ma Ma', 'Teacher', 'mama@gmail.com', '$2y$10$o5PQ0KVQz8IAKl0E5OpdquGJ7SldNpJgYribD6lZ4T87dvXqBvwUS', 1, 2, '2020-11-30 08:59:04'),
-(4, 'User 1', '3CS - 3', 'user1@gmail.com', '$2y$10$RL7t4y4tw2oHq7.x3aR9bO/oMKuLxEaDTMS2mtdO.f8amHVR6Vhey', 0, 1, '2020-12-05 12:38:11'),
-(5, 'Super Admin', 'Super Admin', 'superadmin@lms.com', '$2y$10$h76lhrAMyX1HUdlqvxKMo..L1ejD73tcP2G1Ij4fPnEfNgubTYOXa', 2, 2, '2020-12-05 12:26:18');
+(4, 'User 1', '3CS - 3', 'user1@gmail.com', '$2y$10$RL7t4y4tw2oHq7.x3aR9bO/oMKuLxEaDTMS2mtdO.f8amHVR6Vhey', 0, 1, '2013-12-05 12:38:11'),
+(5, 'Super Admin', 'Super Admin', 'superadmin@lms.com', '$2y$10$h76lhrAMyX1HUdlqvxKMo..L1ejD73tcP2G1Ij4fPnEfNgubTYOXa', 2, 2, '2020-12-05 12:26:18'),
+(6, 'U Mya', 'Teacher', 'umya@gmail.com', '$2y$10$hhQyKp6mWThjcLNPTRGaveWaxgeVZv4OLpkbjwYPcg37OBKdAKbpi', 1, 0, '2020-12-10 06:49:34');
 
 --
 -- Indexes for dumped tables
@@ -386,7 +392,7 @@ ALTER TABLE `assignment_done`
 -- AUTO_INCREMENT for table `grade`
 --
 ALTER TABLE `grade`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `journal`
@@ -398,7 +404,7 @@ ALTER TABLE `journal`
 -- AUTO_INCREMENT for table `journal_done`
 --
 ALTER TABLE `journal_done`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `queue`
@@ -422,19 +428,19 @@ ALTER TABLE `quize_title`
 -- AUTO_INCREMENT for table `quiz_done`
 --
 ALTER TABLE `quiz_done`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `quiz_result`
 --
 ALTER TABLE `quiz_result`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -8972,7 +8972,7 @@ body,
 .sidebar-dark-primary .nav-sidebar > .nav-item.menu-open > .nav-link,
 .sidebar-dark-primary .nav-sidebar > .nav-item:hover > .nav-link {
   color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #007bff !important;
 }
 
 .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active {
@@ -9003,7 +9003,7 @@ body,
 
 .sidebar-dark-primary .nav-treeview > .nav-item > .nav-link:hover {
   color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #007bff;
 }
 
 .sidebar-dark-primary .nav-treeview > .nav-item > .nav-link.active, .sidebar-dark-primary .nav-treeview > .nav-item > .nav-link.active:hover {

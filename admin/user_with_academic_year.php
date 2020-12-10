@@ -14,7 +14,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0 text-dark">User</h1>
+            <h1 class="m-0 text-dark">Students (<?php echo $_GET['year'] - 1 . " - " . $_GET['year']; ?>)</h1>
           </div><!-- /.col -->
           <!-- /.col -->
         </div><!-- /.row -->
@@ -47,6 +47,7 @@
                             $user_arr = $user->index();
                             $index = 1;
                             foreach($user_arr as $value){
+                                if(date("Y", strtotime($value->time_stamp)) == $_GET['year']){
                             ?>
                                 <tr>
                                     <td>
@@ -105,6 +106,7 @@
                                 </tr>
                             <?php
                             }
+                        }   
                         ?>
                     </tbody>
                 </table>

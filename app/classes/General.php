@@ -196,6 +196,73 @@ class General extends DB{
         $res = $stmt->fetch(PDO::FETCH_OBJ);
         return $res;
     }
+
+    public function countAssignment(){
+        $sql = "SELECT COUNT(*) AS count FROM assignment";
+        $stmt = $this->con->prepare($sql);
+        $stmt->execute();
+        $res = $stmt->fetch(PDO::FETCH_OBJ);
+        return $res;
+    }
+
+    public function countQuiz(){
+        $sql = "SELECT COUNT(*) AS count FROM quize_title";
+        $stmt = $this->con->prepare($sql);
+        $stmt->execute();
+        $res = $stmt->fetch(PDO::FETCH_OBJ);
+        return $res;
+    }
+
+    public function countGrade(){
+        $sql = "SELECT COUNT(*) AS count FROM grade";
+        $stmt = $this->con->prepare($sql);
+        $stmt->execute();
+        $res = $stmt->fetch(PDO::FETCH_OBJ);
+        return $res;
+    }
+
+    public function countJournal(){
+        $sql = "SELECT COUNT(*) AS count FROM journal";
+        $stmt = $this->con->prepare($sql);
+        $stmt->execute();
+        $res = $stmt->fetch(PDO::FETCH_OBJ);
+        return $res;
+    }
+
+    public function countUser(){
+        $sql = "SELECT COUNT(*) AS count FROM users";
+        $stmt = $this->con->prepare($sql);
+        $stmt->execute();
+        $res = $stmt->fetch(PDO::FETCH_OBJ);
+        return $res;
+    }
+
+    public function countAssignmentByUser(){
+        $sql = "SELECT COUNT(*) AS count FROM assignment WHERE user_id=:user_id";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindParam("user_id", $_SESSION['admin_id'], PDO::PARAM_INT);
+        $stmt->execute();
+        $res = $stmt->fetch(PDO::FETCH_OBJ);
+        return $res;
+    }
+
+    public function countQuizByUser(){
+        $sql = "SELECT COUNT(*) AS count FROM quize_title WHERE user_id=:user_id";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindParam("user_id", $_SESSION['admin_id'], PDO::PARAM_INT);
+        $stmt->execute();
+        $res = $stmt->fetch(PDO::FETCH_OBJ);
+        return $res;
+    }
+
+    public function countJournalByUser(){
+        $sql = "SELECT COUNT(*) AS count FROM journal WHERE user_id=:user_id";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindParam("user_id", $_SESSION['admin_id'], PDO::PARAM_INT);
+        $stmt->execute();
+        $res = $stmt->fetch(PDO::FETCH_OBJ);
+        return $res;
+    }
 }
 
 ?>
