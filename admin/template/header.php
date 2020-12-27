@@ -180,7 +180,7 @@
         <div class="info">
           <?php 
             $user = new User;
-            $user_data = $user->currentUser();
+            $user_data = $user->currentAdmin();
           ?>
           <a href="#" class="d-block"><?php echo $user_data->name; ?></a>
         </div>
@@ -195,7 +195,7 @@
             <a href="grade.php" class="nav-link">
               <i class="nav-icon fa fa-graduation-cap"></i>
               <p>
-                Grade
+                Year
               </p>
             </a>
           </li>
@@ -280,16 +280,22 @@
               </li>
             </ul>
           </li>
+          <?php
+            if($user_data->status == 2){
+              ?>
+                <li class="nav-item">
+                  <a href="user.php" class="nav-link">
+                    <i class="nav-icon fa fa-users"></i>
+                    <p>
+                      User
+                    </p>
+                  </a>
+                </li>
+              <?php
+            }
+          ?>
           <li class="nav-item">
-            <a href="user.php" class="nav-link">
-              <i class="nav-icon fa fa-users"></i>
-              <p>
-                User
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../" class="nav-link bg-danger">
+            <a href="logout.php" class="nav-link bg-danger">
               <i class="nav-icon fa fa-sign-out"></i>
               <p>
                 Log Out

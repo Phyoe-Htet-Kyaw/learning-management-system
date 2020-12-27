@@ -30,11 +30,11 @@
         <div class="row">
           <div class="col-sm-12">
           <?php
-            if($journal->update($_POST, $_GET['id'])){
+            if($journal->update($_POST, $_FILES, $_GET['id'])){
                 echo "<script>location.href='journal.php'</script>";
             }
           ?>
-            <form action="#" method="post">
+            <form action="#" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group">
@@ -42,7 +42,7 @@
                             <input type="text" name="journal_title" value="<?php echo $data->journal_title; ?>" placeholder="Enter Journal Title" id="journal_title" required class="form-control form-control-sm">
                         </div>
                         <div class="form-group">
-                            <label for="grade">Grade <span class="text-danger">*</span>:</label>
+                            <label for="grade">Year <span class="text-danger">*</span>:</label>
                             <select name="grade_id" id="grade" required class="form-control form-control-sm">
                                 <?php 
                                     $grade_arr = $journal->fetchGrade();
@@ -66,7 +66,11 @@
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group">
                             <label for="incstruction">Instruction <span class="text-danger">*</span>:</label>
-                            <textarea name="instruction" id="instruction" cols="30" rows="13" class="form-control form-control-sm" required placeholder="Enter Instruction"><?php echo $data->instruction; ?></textarea>
+                            <textarea name="instruction" id="instruction" cols="30" rows="9" class="form-control form-control-sm" required placeholder="Enter Instruction"><?php echo $data->instruction; ?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="pdf">PDF <span class="text-danger">*</span>:</label>
+                            <input type="file" name="pdf" id="pdf" class="form-control-file form-control-sm">
                         </div>
                     </div>
                 </div>

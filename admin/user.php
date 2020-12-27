@@ -29,7 +29,7 @@
                             <th>Name</th>
                             <th>Roll No</th>
                             <th>Email</th>
-                            <th>Grade</th>
+                            <th>Year</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -42,7 +42,7 @@
                             ?>
                                 <tr>
                                     <td>
-                                        <a href="switch_user.php?id=<?php echo $value->id; ?>"><button class="btn btn-primary btn-sm"><i class="fa fa-exchange"></i></button></a>
+                                        <a href="switch_user.php?id=<?php echo $value->id; ?>"><button class="btn btn-info btn-sm"><i class="fa fa-exchange"></i></button></a>
                                         <!-- <a href="#"><button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></a> -->
                                     </td>
                                     <td><?php echo $index; $index++; ?></td>
@@ -66,9 +66,13 @@
                                                 <?php
                                             }else if($value->status == 1){
                                                 ?>
-                                                    <span class="badge badge-danger">Teacher</span>
+                                                    <span class="badge badge-primary">Teacher</span>
                                                 <?php
-                                            }
+                                            }else if($value->status == 2){
+                                              ?>
+                                                  <span class="badge badge-danger">Admin</span>
+                                              <?php
+                                          }
                                         ?>
                                     </td>
                                 </tr>

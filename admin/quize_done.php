@@ -25,7 +25,7 @@
                         <tr>
                             <th>No.</th>
                             <th>Quize Title</th>
-                            <th>User</th>
+                            <th>Student</th>
                             <th>Marks</th>
                             <th>Answer Date</th>
                         </tr>

@@ -30,8 +30,8 @@
                             <th>No.</th>
                             <th>Assignment Title</th>
                             <th width="500">Instruction</th>
-                            <th>Grade</th>
-                            <th>User</th>
+                            <th>Year</th>
+                            <th>Teacher</th>
                             <th>Start Date</th>
                             <th>End Date</th>
                         </tr>

@@ -125,22 +125,38 @@ class Authentication extends DB{
     public function checkSession(){
         if(!isset($_SESSION['user_id'])){
             echo "<script>location.href='login.php'</script>";
+        }else{
+            $user_id = $_SESSION['user_id'];
+            $sql = "SELECT * FROM users WHERE id=:id";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindParam("id", $user_id, PDO::PARAM_INT);
+            $stmt->execute();
+            $res = $stmt->fetch(PDO::FETCH_OBJ);
+            if($res->status == 1){
+                $_SESSION['admin_id'] = $res->id;
+                echo "<script>location.href='admin/index.php'</script>";
+            }else if($res->status == 2){
+                $_SESSION['admin_id'] = $res->id;
+                echo "<script>location.href='admin/index.php'</script>";
+            }
         }
+
+        
     }
 
     public function checkSessionAdmin(){
-        if(isset($_SESSION['user_id'])){
-            $id = $_SESSION['user_id'];
+        if(isset($_SESSION['admin_id'])){
+            $id = $_SESSION['admin_id'];
             $sql = "SELECT * FROM users WHERE id=:id";
             $stmt = $this->con->prepare($sql);
             $stmt->bindParam("id", $id, PDO::PARAM_INT);
             $stmt->execute();
             $res = $stmt->fetch(PDO::FETCH_OBJ);
             if($res->status == 0){
-                echo "<script>location.href='../'</script>";
+                echo "<script>location.href='../login.php'</script>";
             }
         }else{
-            echo "<script>location.href='../login.php'</script>";
+            echo "<script>location.href='../'</script>";
         }
     }
 
@@ -148,6 +164,7 @@ class Authentication extends DB{
         session_destroy();
         return true;
     }
+
 }
 
 ?>

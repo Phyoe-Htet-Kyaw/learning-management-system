@@ -36,7 +36,7 @@ class QuizeTitle extends DB{
                 echo "<p class='alert alert-danger'>Please enter quize title!</p>";
             }else{
                 if($grade_id == ""){
-                    echo "<p class='alert alert-danger'>Please select Grade!</p>";
+                    echo "<p class='alert alert-danger'>Please select Year!</p>";
                 }else{
                     if($start_date == ""){
                         echo "<p class='alert alert-danger'>Please select start date!</p>";
@@ -212,7 +212,7 @@ class QuizeTitle extends DB{
                 echo "<p class='alert alert-danger'>Please enter quize title!</p>";
             }else{
                 if($grade_id == ""){
-                    echo "<p class='alert alert-danger'>Please select Grade!</p>";
+                    echo "<p class='alert alert-danger'>Please select Year!</p>";
                 }else{
                     if($start_date == ""){
                         echo "<p class='alert alert-danger'>Please select start date!</p>";

@@ -17,7 +17,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0 text-dark">Edit Grade</h1>
+            <h1 class="m-0 text-dark">Edit Year</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -38,7 +38,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group">
-                            <label for="grade">Grade <span class="text-danger">*</span>:</label>
+                            <label for="grade">Year <span class="text-danger">*</span>:</label>
                             <input type="text" name="grade_name" value="<?php echo $data->grade_name; ?>" placeholder="Enter Grade" id="grade" required class="form-control form-control-sm">
                         </div>
                     </div>

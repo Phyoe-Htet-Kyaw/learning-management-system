@@ -30,8 +30,8 @@
                             <th>No.</th>
                             <th>Journal Title</th>
                             <th width="500">Instruction</th>
-                            <th>Grade</th>
-                            <th>User</th>
+                            <th>Year</th>
+                            <th>Teacher</th>
                             <th>Start Date</th>
                             <th>End Date</th>
                         </tr>
@@ -45,6 +45,7 @@
                             ?>
                               <tr>
                                 <td>
+                                    <a href="assets/uploads/<?php echo $value->pdf; ?>" target="_blank"><button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button></a>
                                     <a href="edit_journal.php?id=<?php echo $value->id; ?>"><button class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></button></a>
                                     <a href="delete_journal.php?id=<?php echo $value->id; ?>"><button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></a>
                                 </td>

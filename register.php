@@ -57,7 +57,7 @@
         </div>
         <div class="main-header">
             <div class="header-part">
-                <h1>Learning Management System <span>with Agent</span></h1>
+                <h1>Learning Management System</h1>
             </div>
         </div>
     </div>

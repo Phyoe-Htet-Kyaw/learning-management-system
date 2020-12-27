@@ -33,7 +33,7 @@
                             <input type="text" name="quize_title" placeholder="Enter Quize Title" id="quize_title" required class="form-control form-control-sm">
                         </div>
                         <div class="form-group">
-                            <label for="grade">Grade <span class="text-danger">*</span>:</label>
+                            <label for="grade">Year <span class="text-danger">*</span>:</label>
                             <select name="grade_id" id="grade" required class="form-control form-control-sm">
                                 <?php 
                                     $grade_arr = $quize_title->fetchGrade();

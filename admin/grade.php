@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Grade</h1>
+            <h1 class="m-0 text-dark">Year</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <a href="add_grade.php"><button class="btn btn-sm btn-primary float-right"><i class="fa fa-plus"></i></button></a>
@@ -28,7 +28,7 @@
                         <tr>
                             <th>Options</th>
                             <th>No.</th>
-                            <th>Grade</th>
+                            <th>Year</th>
                         </tr>
                     </thead>
                     <tbody>

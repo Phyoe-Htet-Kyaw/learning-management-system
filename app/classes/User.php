@@ -26,6 +26,16 @@ class User extends DB{
         return $res;
     }
 
+    public function currentAdmin(){
+        $id = $_SESSION['admin_id'];
+        $sql = "SELECT * FROM users WHERE id=:id";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindParam("id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $res = $stmt->fetch(PDO::FETCH_OBJ);
+        return $res;
+    }
+
     public function switchUser($id){
 
         $status_sql = "SELECT * FROM users WHERE id=:id";

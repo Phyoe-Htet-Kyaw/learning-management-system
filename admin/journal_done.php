@@ -26,8 +26,8 @@
                             <th>No.</th>
                             <th>Journal Title</th>
                             <th width="500">Instruction</th>
-                            <th>Uploaded By</th>
-                            <th>Uploaded DateTime</th>
+                            <th>Student</th>
+                            <th>Readed DateTime</th>
                             <th>Start Date</th>
                             <th>End Date</th>
                         </tr>

@@ -21,7 +21,7 @@ class Grade extends DB{
             $grade_name = $request['grade_name'];
 
             if($grade_name == ""){
-                echo "<p class='alert alert alert-danger'>Please enter grade!</p>";
+                echo "<p class='alert alert alert-danger'>Please enter year!</p>";
             }else{
                 $sql = "INSERT INTO grade (grade_name) VALUES (:grade_name)";
                 $stmt = $this->con->prepare($sql);
@@ -46,7 +46,7 @@ class Grade extends DB{
             $grade_name = $request['grade_name'];
 
             if($grade_name == ""){
-                echo "<p class='alert alert-danger'>Please enter grade!</p>";
+                echo "<p class='alert alert-danger'>Please enter year!</p>";
             }else{
                 $sql = "UPDATE grade SET grade_name=:grade_name WHERE id=:id";
                 $stmt = $this->con->prepare($sql);

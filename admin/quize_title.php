@@ -29,8 +29,8 @@
                             <th>Options</th>
                             <th>No.</th>
                             <th>Quize Title</th>
-                            <th>Grade</th>
-                            <th>User</th>
+                            <th>Year</th>
+                            <th>Teacher</th>
                             <th>Start Date</th>
                             <th>End Date</th>
                         </tr>

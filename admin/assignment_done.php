@@ -27,7 +27,7 @@
                             <th>No.</th>
                             <th>Assignment Title</th>
                             <th width="500">Instruction</th>
-                            <th>Uploaded By</th>
+                            <th>Student</th>
                             <th>Uploaded DateTime</th>
                             <th>Start Date</th>
                             <th>End Date</th>

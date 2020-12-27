@@ -33,7 +33,7 @@
                             <th>Answer 1</th>
                             <th>Answer 2</th>
                             <th>Answer 3</th>
-                            <th>User</th>
+                            <th>Teacher</th>
                         </tr>
                     </thead>
                     <tbody>
