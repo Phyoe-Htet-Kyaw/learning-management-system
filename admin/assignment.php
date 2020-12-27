@@ -41,32 +41,63 @@
                           $assignment = new Assignment;
                           $assignment_arr = $assignment->index();
                           $index = 1;
+                          $admin_data = $assignment->fetchUserById($_SESSION['admin_id']);
                           foreach($assignment_arr as $value){
-                            ?>
-                              <tr>
-                                <td>
-                                    <a href="edit_assignment.php?id=<?php echo $value->id; ?>"><button class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></button></a>
-                                    <a href="delete_assignment.php?id=<?php echo $value->id; ?>"><button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></a>
-                                </td>
-                                <td><?php echo $index; $index++; ?></td>
-                                <td><?php echo $value->assignment_title; ?></td>
-                                <td><?php echo $value->instruction; ?></td>
-                                <td>
-                                  <?php
-                                    $grade_data = $assignment->fetchGradeById($value->grade_id);
-                                    echo $grade_data->grade_name;
-                                  ?>
-                                </td>
-                                <td>
-                                  <?php
-                                    $user_data = $assignment->fetchUserById($value->user_id);
-                                    echo $user_data->name;
-                                  ?>
-                                </td>
-                                <td><?php echo $value->start_date; ?></td>
-                                <td><?php echo $value->end_date; ?></td>
-                            </tr>
-                            <?php
+                            if($admin_data->status != 2){
+                              if($value->user_id == $_SESSION['admin_id']){
+                                ?>
+                                  <tr>
+                                    <td>
+                                        <a href="edit_assignment.php?id=<?php echo $value->id; ?>"><button class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></button></a>
+                                        <a href="delete_assignment.php?id=<?php echo $value->id; ?>"><button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></a>
+                                    </td>
+                                    <td><?php echo $index; $index++; ?></td>
+                                    <td><?php echo $value->assignment_title; ?></td>
+                                    <td><?php echo $value->instruction; ?></td>
+                                    <td>
+                                      <?php
+                                        $grade_data = $assignment->fetchGradeById($value->grade_id);
+                                        echo $grade_data->grade_name;
+                                      ?>
+                                    </td>
+                                    <td>
+                                      <?php
+                                        $user_data = $assignment->fetchUserById($value->user_id);
+                                        echo $user_data->name;
+                                      ?>
+                                    </td>
+                                    <td><?php echo $value->start_date; ?></td>
+                                    <td><?php echo $value->end_date; ?></td>
+                                </tr>
+                                <?php
+                                }
+                            }else{
+                              ?>
+                                  <tr>
+                                    <td>
+                                        <a href="edit_assignment.php?id=<?php echo $value->id; ?>"><button class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></button></a>
+                                        <a href="delete_assignment.php?id=<?php echo $value->id; ?>"><button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></a>
+                                    </td>
+                                    <td><?php echo $index; $index++; ?></td>
+                                    <td><?php echo $value->assignment_title; ?></td>
+                                    <td><?php echo $value->instruction; ?></td>
+                                    <td>
+                                      <?php
+                                        $grade_data = $assignment->fetchGradeById($value->grade_id);
+                                        echo $grade_data->grade_name;
+                                      ?>
+                                    </td>
+                                    <td>
+                                      <?php
+                                        $user_data = $assignment->fetchUserById($value->user_id);
+                                        echo $user_data->name;
+                                      ?>
+                                    </td>
+                                    <td><?php echo $value->start_date; ?></td>
+                                    <td><?php echo $value->end_date; ?></td>
+                                </tr>
+                                <?php
+                            }
                           }
                         ?>
                     </tbody>

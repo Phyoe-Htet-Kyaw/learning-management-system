@@ -40,7 +40,10 @@
                           $quize = new QuizeTitle;
                           $quize_arr = $quize->index();
                           $index = 1;
+                          $admin_data = $quize->fetchUserById($_SESSION['admin_id']);
                           foreach($quize_arr as $value){
+                            if($admin_data->status != 2){
+                              if($value->user_id == $_SESSION['admin_id']){
                             ?>
                               <tr>
                                 <td>
@@ -65,6 +68,33 @@
                                 <td><?php echo $value->end_date; ?></td>
                             </tr>
                             <?php
+                              }
+                            }else{
+                              ?>
+                              <tr>
+                                <td>
+                                    <a href="edit_quize_title.php?id=<?php echo $value->id; ?>"><button class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></button></a>
+                                    <a href="delete_quize_title.php?id=<?php echo $value->id; ?>"><button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></a>
+                                </td>
+                                <td><?php echo $index; $index++; ?></td>
+                                <td><?php echo $value->quize_title; ?></td>
+                                <td>
+                                  <?php
+                                    $grade_data = $quize->fetchGradeById($value->grade_id);
+                                    echo $grade_data->grade_name;
+                                  ?>
+                                </td>
+                                <td>
+                                  <?php
+                                    $user_data = $quize->fetchUserById($value->user_id);
+                                    echo $user_data->name;
+                                  ?>
+                                </td>
+                                <td><?php echo $value->start_date; ?></td>
+                                <td><?php echo $value->end_date; ?></td>
+                            </tr>
+                            <?php
+                            }
                           }
                         ?>
                     </tbody>

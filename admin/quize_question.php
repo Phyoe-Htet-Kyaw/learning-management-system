@@ -41,7 +41,10 @@
                           $quize_question = new QuizeQuestion;
                           $quize_question_arr = $quize_question->index();
                           $index = 1;
+                          $admin_data = $quize_question->fetchUserById($_SESSION['admin_id']);
                           foreach($quize_question_arr as $value){
+                            if($admin_data->status != 2){
+                              if($value->user_id == $_SESSION['admin_id']){
                             ?>
                               <tr>
                                 <td>
@@ -98,6 +101,65 @@
                                 </td>
                             </tr>
                             <?php
+                              }
+                            }else{
+                              ?>
+                              <tr>
+                                <td>
+                                    <a href="edit_quize_question.php?id=<?php echo $value->id; ?>"><button class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></button></a>
+                                    <a href="delete_quize_question.php?id=<?php echo $value->id; ?>"><button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></a>
+                                </td>
+                                <td><?php echo $index; $index++; ?></td>
+                                <td>
+                                    <?php
+                                        $quize_title = new QuizeTitle;
+                                        $quize = $quize_title->fetchById($value->quize_title_id);
+                                        echo $quize->quize_title;
+                                    ?>
+                                </td>
+                                <td><?php echo $value->question; ?></td>
+                                <td>
+                                    <?php 
+                                        if($value->true_answer_no == 1){
+                                            ?>
+                                                <span class="badge badge-success"><?php echo $value->answer_1; ?></span>
+                                            <?php
+                                        }else{
+                                            echo $value->answer_1;
+                                        }
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php 
+                                        if($value->true_answer_no == 2){
+                                            ?>
+                                                <span class="badge badge-success"><?php echo $value->answer_2; ?></span>
+                                            <?php
+                                        }else{
+                                            echo $value->answer_2;
+                                        }
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php 
+                                        if($value->true_answer_no == 3){
+                                            ?>
+                                                <span class="badge badge-success"><?php echo $value->answer_3; ?></span>
+                                            <?php
+                                        }else{
+                                            echo $value->answer_3;
+                                        }
+                                    ?>
+                                </td>
+                                <td>
+                                  <?php
+                                    $user_data = $quize_question->fetchUserById($value->user_id);
+                                    echo $user_data->name;
+                                  ?>
+                                </td>
+                            </tr>
+                            <?php
+                            }
                           }
                         ?>
                     </tbody>
