@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 28, 2021 at 10:55 AM
+-- Generation Time: Jan 28, 2021 at 12:21 PM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -63,6 +63,17 @@ CREATE TABLE `grade` (
   `grade_name` varchar(255) NOT NULL,
   `time_stamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `grade`
+--
+
+INSERT INTO `grade` (`id`, `grade_name`, `time_stamp`) VALUES
+(1, 'Third Year', '2021-01-28 11:19:47'),
+(2, 'Final Year', '2021-01-28 11:19:54'),
+(3, 'First Year (Honous)', '2021-01-28 11:20:13'),
+(4, 'Second Year (Honous)', '2021-01-28 11:20:24'),
+(5, 'Third Year (Honous)', '2021-01-28 11:20:36');
 
 -- --------------------------------------------------------
 
@@ -194,6 +205,15 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `roll_no`, `email`, `password`, `status`, `grade_id`, `time_stamp`) VALUES
+(1, 'Mg Mg', '3CS - 3', 'mgmg@gmail.comm', '$2y$10$4tyAw3a1xXFxb/BN5V6Uz..W5U.5VcHw4bWfDMJ1pRG7uOGkQJTRu', 0, 0, '2021-01-28 11:16:58'),
+(2, 'U Mya', '', 'umya@gmail.com', '$2y$10$mmM7VsVAky9/lcXOqHWwbufhk.41ySA/ccvw6Uwl..aOhbLkBD5G2', 1, 0, '2021-01-28 11:17:32'),
+(3, 'Super Admin', '', 'superadmin@lms.com', '$2y$10$ED0HIMuNUxjypCbGywdSkORSiqyoe1KWxqZ1SRyknASmytJ1Mj5EW', 2, 0, '2021-01-28 11:19:28');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -283,7 +303,7 @@ ALTER TABLE `assignment_done`
 -- AUTO_INCREMENT for table `grade`
 --
 ALTER TABLE `grade`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `journal`
@@ -331,7 +351,7 @@ ALTER TABLE `quiz_result`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

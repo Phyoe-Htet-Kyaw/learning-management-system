@@ -25,22 +25,6 @@
             </p>
         </div>
     </div>
-    <?php
-        // $general = new General;
-        // if($general->checkMain()){
-        //     $data = $general->checkMain();
-        //     if(isset($data->assignment_title)){
-        //         include "template/assignment.php";
-        //     }else if(isset($data->journal_title)){
-        //         include "template/journal.php";
-        //     }else if(isset($data->quize_title)){
-        //         $checking = $general->checkQuizFinishOrNot($data->id);
-        //         include "template/quize.php";
-        //     }
-        // }else{
-        //     include "template/no_question.php";
-        // }
-    ?>
     <div class="main-section">
         <div class="main-section-header">
             <h1>Schedule</h1>

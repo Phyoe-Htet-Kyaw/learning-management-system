@@ -12,12 +12,12 @@ class Authentication extends DB{
         if(isset($request['submit'])){
             $username = $request['username'];
             $email = $request['email'];
-            $roll_no = $request['roll_no'];
+            $roll_no = (!isset($request['roll_no'])) ? "" : $request['roll_no'];
             $password_origin = $request['password'];
             $password = password_hash($request['password'], PASSWORD_BCRYPT);
             $con_password = $request['con_password'];
-            $grade_id = $request['grade_id'];
-            $status = 0;
+            $grade_id = (!isset($request['grade_id'])) ? "" : $request['grade_id'];
+            $status = ($request['register_type'] == "teacher") ? 1 : 0;
 
             if($username == ""){
                 echo "<p class='alert alert-danger'>Please enter username!</p>";
@@ -25,42 +25,38 @@ class Authentication extends DB{
                 if($email == ""){
                     echo "<p class='alert alert-danger'>Please enter email!</p>";
                 }else{
-                    if($roll_no == ""){
-                        echo "<p class='alert alert-danger'>Please enter roll_no!</p>";
+                    if($password == ""){
+                        echo "<p class='alert alert-danger'>Please enter password!</p>";
                     }else{
-                        if($password == ""){
-                            echo "<p class='alert alert-danger'>Please enter password!</p>";
+                        if($con_password == ""){
+                            echo "<p class='alert alert-danger'>Please enter confirm password!</p>";
                         }else{
-                            if($con_password == ""){
-                                echo "<p class='alert alert-danger'>Please enter confirm password!</p>";
+                            if(strlen($password) < 8){
+                                echo "<p class='alert alert-danger'>Please enter password length more than 8!</p>";
                             }else{
-                                if(strlen($password) < 8){
-                                    echo "<p class='alert alert-danger'>Please enter password length more than 8!</p>";
+                                if($password_origin != $con_password){
+                                    echo "<p class='alert alert-danger'>Password and confirm password didn't match!</p>";
                                 }else{
-                                    if($password_origin != $con_password){
-                                        echo "<p class='alert alert-danger'>Password and confirm password didn't match!</p>";
-                                    }else{
 
-                                        $sql_sec = "SELECT * FROM users WHERE email=:email";
-                                        $stmt_sec = $this->con->prepare($sql_sec);
-                                        $stmt_sec->bindParam("email", $email, PDO::PARAM_STR);
-                                        $stmt_sec->execute();
-                                        $res_sec = $stmt_sec->fetch(PDO::FETCH_OBJ);
-                                        if(is_object($res_sec)){
-                                            echo "<p class='alert alert-danger'>Email is already registered. Please try another one!</p>";
-                                        }else{
-                                            $sql = "INSERT INTO users (name, roll_no, email, password, status, grade_id) VALUES (:name, :roll_no, :email, :password, :status, :grade_id)";
-                                            $stmt = $this->con->prepare($sql);
-                                            $stmt->bindParam(":name", $username, PDO::PARAM_STR);
-                                            $stmt->bindParam(":roll_no", $roll_no, PDO::PARAM_STR);
-                                            $stmt->bindParam(":email", $email, PDO::PARAM_STR);
-                                            $stmt->bindParam(":password", $password, PDO::PARAM_STR);
-                                            $stmt->bindParam(":status", $status, PDO::PARAM_INT);
-                                            $stmt->bindParam(":grade_id", $grade_id, PDO::PARAM_INT);
-                                            $stmt->execute();
-                                            $this->setSession($email);
-                                            return true;
-                                        }
+                                    $sql_sec = "SELECT * FROM users WHERE email=:email";
+                                    $stmt_sec = $this->con->prepare($sql_sec);
+                                    $stmt_sec->bindParam("email", $email, PDO::PARAM_STR);
+                                    $stmt_sec->execute();
+                                    $res_sec = $stmt_sec->fetch(PDO::FETCH_OBJ);
+                                    if(is_object($res_sec)){
+                                        echo "<p class='alert alert-danger'>Email is already registered. Please try another one!</p>";
+                                    }else{
+                                        $sql = "INSERT INTO users (name, roll_no, email, password, status, grade_id) VALUES (:name, :roll_no, :email, :password, :status, :grade_id)";
+                                        $stmt = $this->con->prepare($sql);
+                                        $stmt->bindParam(":name", $username, PDO::PARAM_STR);
+                                        $stmt->bindParam(":roll_no", $roll_no, PDO::PARAM_STR);
+                                        $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+                                        $stmt->bindParam(":password", $password, PDO::PARAM_STR);
+                                        $stmt->bindParam(":status", $status, PDO::PARAM_INT);
+                                        $stmt->bindParam(":grade_id", $grade_id, PDO::PARAM_INT);
+                                        $stmt->execute();
+                                        $this->setSession($email);
+                                        return true;
                                     }
                                 }
                             }

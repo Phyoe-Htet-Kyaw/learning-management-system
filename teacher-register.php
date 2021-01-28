@@ -3,7 +3,7 @@
     <div class="login-bg-color">
         <div class="login">
             <h1 class="register-header">Sign Up</h1>
-            <h2 style="text-align: center">Student</h2>
+            <h2 style="text-align: center">Teacher</h2>
             <?php
                 $auth = new Authentication;
                 if($auth->register($_POST)){
@@ -12,7 +12,7 @@
             ?>
             <div class="login-form">
                 <form action="#" method="POST">
-                    <input type="hidden" value="student" name="register_type">
+                    <input type="hidden" value="teacher" name="register_type">
                     <div class="form-group">
                         <label for="username">Username <span class="text-red">*</span>: </label>
                         <input type="text" placeholder="Enter Username" id="username" required name="username" />
@@ -20,26 +20,6 @@
                     <div class="form-group">
                         <label for="email">Email <span class="text-red">*</span>: </label>
                         <input type="email" placeholder="Enter Email" id="email" required name="email" />
-                    </div>
-                    <div class="form-group">
-                        <label for="roll_no">Roll <span class="text-red">*</span>: </label>
-                        <input type="text" placeholder="Enter Roll" id="roll_no" required name="roll_no" />
-                    </div>
-                    <div class="form-group">
-                        <label for="grade-id">Year <span class="text-red">*</span>: </label>
-                        <select name="grade_id" id="grade-id">
-                            <option value="0">- Select -</option>
-                            <?php
-                                $grade = new Grade;
-                                $fetch = $grade->index();
-
-                                foreach($fetch as $value){
-                                    ?>
-                                        <option value="<?php echo $value->id; ?>"><?php echo $value->grade_name; ?></option>
-                                    <?php
-                                }
-                            ?>
-                        </select>
                     </div>
                     <div class="form-group">
                         <label for="password">Password <span class="text-red">*</span>: </label>
@@ -56,7 +36,7 @@
                         If you have already an account, please <a href="login.php">sign in</a>.
                     </p>
                     <p>
-                        If you're teacher, please sign up <a href="teacher-register.php">here</a>.
+                        If you're student, please sign up <a href="register.php">here</a>.
                     </p>
                 </form>
             </div>
