@@ -6,7 +6,7 @@
             <?php
                 $auth = new Authentication;
                 if($auth->register($_POST)){
-                    echo "<script>location.href='index.php'</script>";
+                    echo "<script>location.href='index.php#current'</script>";
                 }
             ?>
             <div class="login-form">

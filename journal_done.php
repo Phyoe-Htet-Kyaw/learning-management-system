@@ -7,7 +7,7 @@ $user_id = $_GET['user_id'];
 
 $journal = new Journal;
 if($journal->reportJournal($journal_id, $user_id)){
-    echo "<script>location.href='index.php'</script>";
+    echo "<script>location.href='index.php#current'</script>";
 }
 
 ?>

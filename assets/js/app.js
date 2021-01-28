@@ -13,3 +13,11 @@ upload_file.addEventListener("change", function(){
         submit_btn.style.display = "inline";
     }
 })
+
+$(document).ready(function(){
+    if (window.location.hash == "#current") {
+      $('html, body').animate({
+         scrollTop: $("#current").offset().top
+       }, 1000);
+    }
+});

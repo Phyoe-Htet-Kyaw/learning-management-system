@@ -8,88 +8,61 @@ class General extends DB{
         $this->con = $this->connect();
     }
 
-    public function checkMain(){
-        $today = date('Y-m-d');
-        
-        $user_id = $_SESSION['user_id'];
-        $user_sql = "SELECT * FROM users WHERE id=:id";
-        $user_stmt = $this->con->prepare($user_sql);
-        $user_stmt->bindParam("id", $user_id, PDO::PARAM_INT);
-        $user_stmt->execute();
-        $user_res = $user_stmt->fetch(PDO::PARAM_INT);
-        $grade_id = $user_res->grade_id;
-
-        $sql = "SELECT * FROM queue WHERE grade_id=:grade_id";
+    public function showAssignment($id){
+        $sql = "SELECT * FROM assignment WHERE id=:id";
         $stmt = $this->con->prepare($sql);
-        $stmt->bindParam("grade_id", $grade_id, PDO::PARAM_INT);
+        $stmt->bindParam("id", $id, PDO::PARAM_INT);
         $stmt->execute();
-        $res = $stmt->fetchAll(PDO::FETCH_OBJ);
-        
-        $date_arr = [];
-        foreach($res as $value){
-            $start_date = new DateTime($value->start_date);
-            $end_date = new DateTime($value->end_date);
+        $res = $stmt->fetch(PDO::FETCH_OBJ);
+        return $res;
+    }
 
+    public function showJournal($id){
+        $sql = "SELECT * FROM journal WHERE id=:id";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindParam("id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $res = $stmt->fetch(PDO::FETCH_OBJ);
+        return $res;
+    }
 
-            $date1 = strtotime($value->start_date);
-            $date2 = strtotime($value->end_date);
+    public function showQuiz($id){
+        $sql = "SELECT * FROM quize_title WHERE id=:id";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindParam("id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $res = $stmt->fetch(PDO::FETCH_OBJ);
+        return $res;
+    }
 
-            $diff = abs($date2 - $date1);  
-            $years = floor($diff / (365*60*60*24));  
-            $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));  
-            $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24)); 
+    public function checkAssignmentDone($id){
+        $sql = "SELECT COUNT(*) AS count FROM assignment_done WHERE assignment_id=:id AND user_id=:user_id";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindParam("id", $id, PDO::PARAM_INT);
+        $stmt->bindParam("user_id", $_SESSION['user_id'], PDO::PARAM_INT);
+        $stmt->execute();
+        $res = $stmt->fetch(PDO::FETCH_OBJ);
+        return $res;
+    }
 
-            $i = 0;
-            array_push($date_arr, ["id" => $value->id, "date" => $start_date->format('Y-m-d')]);
-            do{
-                $start_date->modify('+1 day');
-                array_push($date_arr, ["id" => $value->id, "date" => $start_date->format('Y-m-d')]);
-                $i++;
-            }while($i < $days);
-        }
+    public function checkJournalDone($id){
+        $sql = "SELECT COUNT(*) AS count FROM journal_done WHERE journal_id=:id AND user_id=:user_id";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindParam("id", $id, PDO::PARAM_INT);
+        $stmt->bindParam("user_id", $_SESSION['user_id'], PDO::PARAM_INT);
+        $stmt->execute();
+        $res = $stmt->fetch(PDO::FETCH_OBJ);
+        return $res;
+    }
 
-        foreach($date_arr as $value){
-            if($value['date'] == $today){
-                $queue_id = $value['id'];
-
-                $sec_sql = "SELECT * FROM queue WHERE id=:id";
-                $sec_stmt = $this->con->prepare($sec_sql);
-                $sec_stmt->bindParam("id", $queue_id, PDO::PARAM_INT);
-                $sec_stmt->execute();
-                $sec_res = $sec_stmt->fetch(PDO::FETCH_OBJ);
-                if($sec_res->quize_id == null){
-                    if($sec_res->assignment_id == null){
-                        if($sec_res->journal_id == null){
-                            return false;
-                        }else{
-                            $journal_id = $sec_res->journal_id;
-                            $fourth_sql = "SELECT * FROM journal WHERE id=:id";
-                            $fourth_stmt = $this->con->prepare($fourth_sql);
-                            $fourth_stmt->bindParam("id", $journal_id, PDO::PARAM_INT);
-                            $fourth_stmt->execute();
-                            $fourth_res = $fourth_stmt->fetch(PDO::FETCH_OBJ);
-                            return $fourth_res;
-                        }
-                    }else{
-                        $assignment_id = $sec_res->assignment_id;
-                        $third_sql = "SELECT * FROM assignment WHERE id=:id";
-                        $third_stmt = $this->con->prepare($third_sql);
-                        $third_stmt->bindParam("id", $assignment_id, PDO::PARAM_INT);
-                        $third_stmt->execute();
-                        $third_res = $third_stmt->fetch(PDO::FETCH_OBJ);
-                        return $third_res;
-                    }
-                }else{
-                    $quize_id = $sec_res->quize_id;
-                    $fifth_sql = "SELECT * FROM quize_title WHERE id=:id";
-                    $fifth_stmt = $this->con->prepare($fifth_sql);
-                    $fifth_stmt->bindParam("id", $quize_id, PDO::PARAM_INT);
-                    $fifth_stmt->execute();
-                    $fifth_res = $fifth_stmt->fetch(PDO::FETCH_OBJ);
-                    return $fifth_res;
-                }
-            }
-        }
+    public function checkQuizDone($id){
+        $sql = "SELECT COUNT(*) AS count FROM quiz_done WHERE quiz_title_id=:id AND user_id=:user_id";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindParam("id", $id, PDO::PARAM_INT);
+        $stmt->bindParam("user_id", $_SESSION['user_id'], PDO::PARAM_INT);
+        $stmt->execute();
+        $res = $stmt->fetch(PDO::FETCH_OBJ);
+        return $res;
     }
 
     public function quizeRender($id){
@@ -259,6 +232,48 @@ class General extends DB{
         $sql = "SELECT COUNT(*) AS count FROM journal WHERE user_id=:user_id";
         $stmt = $this->con->prepare($sql);
         $stmt->bindParam("user_id", $_SESSION['admin_id'], PDO::PARAM_INT);
+        $stmt->execute();
+        $res = $stmt->fetch(PDO::FETCH_OBJ);
+        return $res;
+    }
+
+    public function fetchAssignmentByDate($date){
+        $user = $this->getUserData();
+        $sql = "SELECT * FROM assignment WHERE start_date=:start_date AND grade_id=:grade_id";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindParam("start_date", $date, PDO::PARAM_STR);
+        $stmt->bindParam("grade_id", $user->grade_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $res;
+    }
+
+    public function fetchJournalByDate($date){
+        $user = $this->getUserData();
+        $sql = "SELECT * FROM journal WHERE start_date=:start_date AND grade_id=:grade_id";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindParam("start_date", $date, PDO::PARAM_STR);
+        $stmt->bindParam("grade_id", $user->grade_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $res;
+    }
+
+    public function fetchQuizByDate($date){
+        $user = $this->getUserData();
+        $sql = "SELECT * FROM quize_title WHERE start_date=:start_date AND grade_id=:grade_id";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindParam("start_date", $date, PDO::PARAM_STR);
+        $stmt->bindParam("grade_id", $user->grade_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $res;
+    }
+
+    public function getUserData(){
+        $sql = "SELECT * FROM users WHERE id=:id";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindParam("id", $_SESSION['user_id'], PDO::PARAM_STR);
         $stmt->execute();
         $res = $stmt->fetch(PDO::FETCH_OBJ);
         return $res;
