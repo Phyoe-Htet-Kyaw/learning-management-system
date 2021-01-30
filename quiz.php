@@ -51,8 +51,8 @@
                         $y = $i+1;
                         echo "<script>location.href='next_quize.php?page=" . $y . "&&id=".$_GET['id']."'</script>";
                     }
-                    if(strtotime($data->start_date) < strtotime(date("Y-m-d"))){
-                        if(strtotime($data->end_date) > strtotime(date("Y-m-d"))){
+                    if(strtotime($data->start_date) <= strtotime(date("Y-m-d"))){
+                        if(strtotime($data->end_date) >= strtotime(date("Y-m-d"))){
                             ?>
                                 <div class="quize">
                                     <b>Question - <?php echo $i+1; ?>: </b>

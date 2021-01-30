@@ -39,8 +39,8 @@
         <?php
             $journal = new Journal;
             if(!$journal->checkJournalReportOrNot($data->id)){
-                if(strtotime($data->start_date) < strtotime(date("Y-m-d"))){
-                    if(strtotime($data->end_date) > strtotime(date("Y-m-d"))){
+                if(strtotime($data->start_date) <= strtotime(date("Y-m-d"))){
+                    if(strtotime($data->end_date) >= strtotime(date("Y-m-d"))){
                         ?>
                             <div class="main-section-button">
                                 <a href="admin/assets/uploads/<?php echo $data->pdf; ?>" target="_blank"><button style="display: inline-block;">Open Journal.</button></a>

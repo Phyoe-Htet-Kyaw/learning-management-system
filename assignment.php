@@ -42,8 +42,8 @@
                 if($assignment->reportAssignment($_POST, $_FILES)){
                     echo "<script>location.href='index.php#current'</script>";
                 }
-                if(strtotime($data->start_date) < strtotime(date("Y-m-d"))){
-                    if(strtotime($data->end_date) > strtotime(date("Y-m-d"))){
+                if(strtotime($data->start_date) <= strtotime(date("Y-m-d"))){
+                    if(strtotime($data->end_date) >= strtotime(date("Y-m-d"))){
                         ?>
                             <div class="main-section-button">
                                 <form action="#" method="post" enctype="multipart/form-data">
